@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReadBooks.Views.NewBookPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save"
+                     Command="{Binding SaveCommand}"
+                     CommandParameter="{Binding SelectedItem, Source={x:Reference booksListView}}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar x:Name="bookSearchBar"
+                       Placeholder="Search ISBN, title or author..."
+                       SearchCommand="{Binding SearchCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference bookSearchBar}}"/>
+            <ListView x:Name="booksListView"
+                      ItemsSource="{Binding SearchResults}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding thumbnail}"
+                                   Text="{Binding title}"
+                                   Detail="{Binding authors}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
